@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body class="ui-fluid">
+        <br />
+        <p:tabView>
+            <p:tab title="Admin">
+                <h:form id="admin" enctype="multipart/form-data">
+                    <h:panelGrid columns="6" cellpadding="10">
+                        <p:outputLabel value="File : "/>
+                        <p:fileUpload value="#{display.file}" mode="simple" />
+                        <p:commandButton value="Upload" ajax="false" actionListener="#{display.upload}" />
+                    </h:panelGrid>
+                </h:form>
+            </p:tab>
+            <p:tab title="Chart">
+                <h:form id="chartForm">
+                    <h:panelGrid columns="2">
+                        <h:panelGrid columns="4" cellpadding="10">
+                            <p:outputLabel value="Start Time : "/>
+                            <p:calendar id="startTime" value="#{display.startDate}" pattern="MM/dd/yyyy HH:mm:ss"/>
+                            <p:outputLabel value="End Time : "/>
+                            <p:calendar id="endTime" value="#{display.endDate}" pattern="MM/dd/yyyy HH:mm:ss"/>
+
+                            <p:commandButton value="Display" actionListener="#{display.display}" update="lineDisplay,tempAndHumid"/>
+                            <h:panelGrid columns="1" style="margin-bottom: 10px">
+                                <p:inputText id="intervaValuel" value="#{display.interval}" />
+                                <p:slider for="intervaValuel" rendered="true" />
+                            </h:panelGrid>
+                        </h:panelGrid>
+                        <h:panelGrid columns="6" cellpadding="10">
+                            <p:outputLabel value="Today Date : "/>
+                            <p:outputLabel value="#{display.todayDate}">
+                                <f:convertDateTime pattern="MM-ddd-yyyy" />
+                            </p:outputLabel>
+
+                        </h:panelGrid>
+                        <h:panelGrid id="tempAndHumid" columns="3" cellpadding="10">
+                            <p:outputLabel value=""/>
+                            <p:outputLabel value="Temperature"/>
+                            <p:outputLabel value="Humidity"/>
+
+                            <p:outputLabel value="Max."/>
+                            <p:outputLabel value="#{display.maxTemp}"/>
+                            <p:outputLabel value="#{display.maxHumid}"/>
+
+                            <p:outputLabel value="Min."/>
+                            <p:outputLabel value="#{display.minTemp}"/>
+                            <p:outputLabel value="#{display.minHumid}"/>
+
+                            <p:outputLabel value="Average"/>
+                            <p:outputLabel value="#{display.aveTemp}"/>
+                            <p:outputLabel value="#{display.aveHumid}"/>
+                        </h:panelGrid>
+                    </h:panelGrid>
+
+                    <p:chart  id="lineDisplay" type="line" model="#{display.lineModel}" style="height:700px;" responsive="true"/>
+                </h:form>
+            </p:tab>
+            <p:tab title="Others">
+                <h:panelGrid columns="2" cellpadding="10">
+                    <h:outputText value="After a break of more than 15 years..." />
+                    <h:outputText value="After a break of more than 15 years..." />
+                </h:panelGrid>
+            </p:tab>
+        </p:tabView>
+
+    </h:body>
+</html>
+
