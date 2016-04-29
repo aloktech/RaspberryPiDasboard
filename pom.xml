@@ -131,7 +131,7 @@
                 </executions>
             </plugin>
         </plugins>
-        <finalName>GraphicalDisplay</finalName>
+        <finalName>RaspberryPiDasboard</finalName>
     </build>
     <repositories>
         <repository>
